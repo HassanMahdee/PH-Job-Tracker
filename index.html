@@ -34,26 +34,26 @@
       }
     </style>
   </head>
-  <body>
+  <body class="bg-base-200">
     <header class="w-[70%] mx-auto py-4">
       <h1 class="capitalize text-3xl font-bold py-2">
         job application tracker
       </h1>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4 py-2">
         <div
-          class="stat border rounded-lg border-info/50 shadow-sm shadow-blue-200"
+          class="stat bg-base-100 border rounded-lg border-info/50 shadow-sm shadow-blue-200"
         >
           <p class="capitalize">total</p>
           <p id="all-stat" class="text-info text-2xl font-bold">0</p>
         </div>
         <div
-          class="stat border rounded-lg border-success/50 shadow-sm shadow-green-200"
+          class="stat bg-base-100 border rounded-lg border-success/50 shadow-sm shadow-green-200"
         >
           <p class="capitalize">interview</p>
           <p id="interview-stat" class="text-success text-2xl font-bold">0</p>
         </div>
         <div
-          class="stat border rounded-lg border-error/50 shadow-sm shadow-red-200"
+          class="stat bg-base-100 border rounded-lg border-error/50 shadow-sm shadow-red-200"
         >
           <p class="capitalize">rejected</p>
           <p id="rejected-stat" class="text-error text-2xl font-bold">0</p>
@@ -62,39 +62,321 @@
     </header>
     <hr class="w-[70%] mx-auto opacity-20" />
     <main class="w-[70%] mx-auto py-4">
-      <!-- name of each tab group should be unique -->
-      <div class="tabs tabs-box space-x-1">
+      <section class="tabs tabs-box space-x-1">
         <input
+          id="all-tab"
           type="radio"
           name="job-tab"
           class="tab text-info bg-info/10"
           aria-label="All"
           checked="checked"
         />
-        <div class="tab-content bg-base-100 border-base-300 p-6">
-          Tab content 1
+        <div class="tab-content mt-2">
+          <!-- daisy UI radio tab hack won't work properly if tab-content and flex/grid is in the same element -->
+          <div id="job-card-set" class="flex flex-col gap-1">
+            <div
+              class="job-card bg-base-100 border-base-300 p-4 rounded-lg flex flex-col gap-2"
+            >
+              <div class="flex justify-between">
+                <div>
+                  <h3 class="text-xl font-semibold">company name</h3>
+                  <p class="text-neutral/50">position</p>
+                </div>
+                <button
+                  class="delete-btn btn btn-outline border-none hover:bg-red-100/50 hover:text-red-600 self-start"
+                >
+                  <i class="fa-regular fa-trash-can"></i>
+                </button>
+              </div>
+              <p class="text-neutral/50 space-x-1">
+                <span>location</span>&bull;<span>type</span>&bull;<span
+                  >salary range</span
+                >
+              </p>
+              <p class="w-max block bg-base-300 p-2">status</p>
+              <p>job description</p>
+              <div id="btn-set" class="flex gap-2">
+                <button
+                  class="interview-btn btn btn-outline border border-success capitalize text-success shadow-sm hover:bg-green-100"
+                >
+                  interview</button
+                ><button
+                  class="rejected-btn btn btn-outline border border-error capitalize text-error shadow-sm hover:bg-red-100"
+                >
+                  rejected
+                </button>
+              </div>
+            </div>
+            <div
+              class="job-card bg-base-100 border-base-300 p-4 rounded-lg flex flex-col gap-2"
+            >
+              <div class="flex justify-between">
+                <div>
+                  <h3 class="text-xl font-semibold">company name</h3>
+                  <p class="text-neutral/50">position</p>
+                </div>
+                <button
+                  class="delete-btn btn btn-outline border-none hover:bg-red-100/50 hover:text-red-600 self-start"
+                >
+                  <i class="fa-regular fa-trash-can"></i>
+                </button>
+              </div>
+              <p class="text-neutral/50 space-x-1">
+                <span>location</span>&bull;<span>type</span>&bull;<span
+                  >salary range</span
+                >
+              </p>
+              <p class="w-max block bg-base-300 p-2">status</p>
+              <p>job description</p>
+              <div id="btn-set" class="flex gap-2">
+                <button
+                  class="interview-btn btn btn-outline border border-success capitalize text-success shadow-sm hover:bg-green-100"
+                >
+                  interview</button
+                ><button
+                  class="rejected-btn btn btn-outline border border-error capitalize text-error shadow-sm hover:bg-red-100"
+                >
+                  rejected
+                </button>
+              </div>
+            </div>
+            <div
+              class="job-card bg-base-100 border-base-300 p-4 rounded-lg flex flex-col gap-2"
+            >
+              <div class="flex justify-between">
+                <div>
+                  <h3 class="text-xl font-semibold">company name</h3>
+                  <p class="text-neutral/50">position</p>
+                </div>
+                <button
+                  class="delete-btn btn btn-outline border-none hover:bg-red-100/50 hover:text-red-600 self-start"
+                >
+                  <i class="fa-regular fa-trash-can"></i>
+                </button>
+              </div>
+              <p class="text-neutral/50 space-x-1">
+                <span>location</span>&bull;<span>type</span>&bull;<span
+                  >salary range</span
+                >
+              </p>
+              <p class="w-max block bg-base-300 p-2">status</p>
+              <p>job description</p>
+              <div id="btn-set" class="flex gap-2">
+                <button
+                  class="interview-btn btn btn-outline border border-success capitalize text-success shadow-sm hover:bg-green-100"
+                >
+                  interview</button
+                ><button
+                  class="rejected-btn btn btn-outline border border-error capitalize text-error shadow-sm hover:bg-red-100"
+                >
+                  rejected
+                </button>
+              </div>
+            </div>
+            <div
+              class="job-card bg-base-100 border-base-300 p-4 rounded-lg flex flex-col gap-2"
+            >
+              <div class="flex justify-between">
+                <div>
+                  <h3 class="text-xl font-semibold">company name</h3>
+                  <p class="text-neutral/50">position</p>
+                </div>
+                <button
+                  class="delete-btn btn btn-outline border-none hover:bg-red-100/50 hover:text-red-600 self-start"
+                >
+                  <i class="fa-regular fa-trash-can"></i>
+                </button>
+              </div>
+              <p class="text-neutral/50 space-x-1">
+                <span>location</span>&bull;<span>type</span>&bull;<span
+                  >salary range</span
+                >
+              </p>
+              <p class="w-max block bg-base-300 p-2">status</p>
+              <p>job description</p>
+              <div id="btn-set" class="flex gap-2">
+                <button
+                  class="interview-btn btn btn-outline border border-success capitalize text-success shadow-sm hover:bg-green-100"
+                >
+                  interview</button
+                ><button
+                  class="rejected-btn btn btn-outline border border-error capitalize text-error shadow-sm hover:bg-red-100"
+                >
+                  rejected
+                </button>
+              </div>
+            </div>
+            <div
+              class="job-card bg-base-100 border-base-300 p-4 rounded-lg flex flex-col gap-2"
+            >
+              <div class="flex justify-between">
+                <div>
+                  <h3 class="text-xl font-semibold">company name</h3>
+                  <p class="text-neutral/50">position</p>
+                </div>
+                <button
+                  class="delete-btn btn btn-outline border-none hover:bg-red-100/50 hover:text-red-600 self-start"
+                >
+                  <i class="fa-regular fa-trash-can"></i>
+                </button>
+              </div>
+              <p class="text-neutral/50 space-x-1">
+                <span>location</span>&bull;<span>type</span>&bull;<span
+                  >salary range</span
+                >
+              </p>
+              <p class="w-max block bg-base-300 p-2">status</p>
+              <p>job description</p>
+              <div id="btn-set" class="flex gap-2">
+                <button
+                  class="interview-btn btn btn-outline border border-success capitalize text-success shadow-sm hover:bg-green-100"
+                >
+                  interview</button
+                ><button
+                  class="rejected-btn btn btn-outline border border-error capitalize text-error shadow-sm hover:bg-red-100"
+                >
+                  rejected
+                </button>
+              </div>
+            </div>
+            <div
+              class="job-card bg-base-100 border-base-300 p-4 rounded-lg flex flex-col gap-2"
+            >
+              <div class="flex justify-between">
+                <div>
+                  <h3 class="text-xl font-semibold">company name</h3>
+                  <p class="text-neutral/50">position</p>
+                </div>
+                <button
+                  class="delete-btn btn btn-outline border-none hover:bg-red-100/50 hover:text-red-600 self-start"
+                >
+                  <i class="fa-regular fa-trash-can"></i>
+                </button>
+              </div>
+              <p class="text-neutral/50 space-x-1">
+                <span>location</span>&bull;<span>type</span>&bull;<span
+                  >salary range</span
+                >
+              </p>
+              <p class="w-max block bg-base-300 p-2">status</p>
+              <p>job description</p>
+              <div id="btn-set" class="flex gap-2">
+                <button
+                  class="interview-btn btn btn-outline border border-success capitalize text-success shadow-sm hover:bg-green-100"
+                >
+                  interview</button
+                ><button
+                  class="rejected-btn btn btn-outline border border-error capitalize text-error shadow-sm hover:bg-red-100"
+                >
+                  rejected
+                </button>
+              </div>
+            </div>
+            <div
+              class="job-card bg-base-100 border-base-300 p-4 rounded-lg flex flex-col gap-2"
+            >
+              <div class="flex justify-between">
+                <div>
+                  <h3 class="text-xl font-semibold">company name</h3>
+                  <p class="text-neutral/50">position</p>
+                </div>
+                <button
+                  class="delete-btn btn btn-outline border-none hover:bg-red-100/50 hover:text-red-600 self-start"
+                >
+                  <i class="fa-regular fa-trash-can"></i>
+                </button>
+              </div>
+              <p class="text-neutral/50 space-x-1">
+                <span>location</span>&bull;<span>type</span>&bull;<span
+                  >salary range</span
+                >
+              </p>
+              <p class="w-max block bg-base-300 p-2">status</p>
+              <p>job description</p>
+              <div id="btn-set" class="flex gap-2">
+                <button
+                  class="interview-btn btn btn-outline border border-success capitalize text-success shadow-sm hover:bg-green-100"
+                >
+                  interview</button
+                ><button
+                  class="rejected-btn btn btn-outline border border-error capitalize text-error shadow-sm hover:bg-red-100"
+                >
+                  rejected
+                </button>
+              </div>
+            </div>
+            <div
+              class="job-card bg-base-100 border-base-300 p-4 rounded-lg flex flex-col gap-2"
+            >
+              <div class="flex justify-between">
+                <div>
+                  <h3 class="text-xl font-semibold">company name</h3>
+                  <p class="text-neutral/50">position</p>
+                </div>
+                <button
+                  class="delete-btn btn btn-outline border-none hover:bg-red-100/50 hover:text-red-600 self-start"
+                >
+                  <i class="fa-regular fa-trash-can"></i>
+                </button>
+              </div>
+              <p class="text-neutral/50 space-x-1">
+                <span>location</span>&bull;<span>type</span>&bull;<span
+                  >salary range</span
+                >
+              </p>
+              <p class="w-max block bg-base-300 p-2">status</p>
+              <p>job description</p>
+              <div id="btn-set" class="flex gap-2">
+                <button
+                  class="interview-btn btn btn-outline border border-success capitalize text-success shadow-sm hover:bg-green-100"
+                >
+                  interview</button
+                ><button
+                  class="rejected-btn btn btn-outline border border-error capitalize text-error shadow-sm hover:bg-red-100"
+                >
+                  rejected
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-
         <input
+          id="interview-tab"
           type="radio"
           name="job-tab"
           class="tab text-success bg-success/10"
           aria-label="Interview"
         />
-        <!-- <div class="tab-content bg-base-100 border-base-300 p-6">
-          Tab content 2
-        </div> -->
-
+        <div id="interview-filter" class="tab-content mt-2">
+          <div
+            class="bg-base-100 p-6 flex flex-col justify-center items-center min-h-[40vh] rounded-xl"
+          >
+            <img src="./jobs.png" alt="job img" class="mb-3" />
+            <h2 class="capitalize text-2xl font-bold">no jobs available</h2>
+            <p class="capitalize opacity-50">
+              check back soon to get new job opportunities!
+            </p>
+          </div>
+        </div>
         <input
+          id="rejected-tab"
           type="radio"
           name="job-tab"
           class="tab text-error bg-error/10"
           aria-label="Rejected"
         />
-        <!-- <div class="tab-content bg-base-100 border-base-300 p-6">
-          Tab content 3
-        </div> -->
-      </div>
+        <div id="rejected-filter" class="tab-content mt-2">
+          <div
+            class="bg-base-100 p-6 flex flex-col justify-center items-center min-h-[40vh] rounded-xl"
+          >
+            <img src="./jobs.png" alt="job img" class="mb-3" />
+            <h2 class="capitalize text-2xl font-bold">no jobs available</h2>
+            <p class="capitalize opacity-50">
+              check back soon to get new job opportunities!
+            </p>
+          </div>
+        </div>
+      </section>
     </main>
     <script src="./scripts/machine.js"></script>
     <script src="./scripts/script.js"></script>

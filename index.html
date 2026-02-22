@@ -1,12 +1,102 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=
-    , initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=
+    , initial-scale=1.0"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="shortcut icon" href="./jobs.png" type="image/x-icon" />
+    <title>PH Job Tracker</title>
+    <style>
+      * {
+        font-family: "Geist", sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="w-[70%] mx-auto py-4">
+      <h1 class="capitalize text-3xl font-bold py-2">
+        job application tracker
+      </h1>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 py-2">
+        <div
+          class="stat border rounded-lg border-info/50 shadow-sm shadow-blue-200"
+        >
+          <p class="capitalize">total</p>
+          <p id="all-stat" class="text-info text-2xl font-bold">0</p>
+        </div>
+        <div
+          class="stat border rounded-lg border-success/50 shadow-sm shadow-green-200"
+        >
+          <p class="capitalize">interview</p>
+          <p id="interview-stat" class="text-success text-2xl font-bold">0</p>
+        </div>
+        <div
+          class="stat border rounded-lg border-error/50 shadow-sm shadow-red-200"
+        >
+          <p class="capitalize">rejected</p>
+          <p id="rejected-stat" class="text-error text-2xl font-bold">0</p>
+        </div>
+      </div>
+    </header>
+    <hr class="w-[70%] mx-auto opacity-20" />
+    <main class="w-[70%] mx-auto py-4">
+      <!-- name of each tab group should be unique -->
+      <div class="tabs tabs-box space-x-1">
+        <input
+          type="radio"
+          name="job-tab"
+          class="tab text-info bg-info/10"
+          aria-label="All"
+          checked="checked"
+        />
+        <div class="tab-content bg-base-100 border-base-300 p-6">
+          Tab content 1
+        </div>
+
+        <input
+          type="radio"
+          name="job-tab"
+          class="tab text-success bg-success/10"
+          aria-label="Interview"
+        />
+        <!-- <div class="tab-content bg-base-100 border-base-300 p-6">
+          Tab content 2
+        </div> -->
+
+        <input
+          type="radio"
+          name="job-tab"
+          class="tab text-error bg-error/10"
+          aria-label="Rejected"
+        />
+        <!-- <div class="tab-content bg-base-100 border-base-300 p-6">
+          Tab content 3
+        </div> -->
+      </div>
+    </main>
+    <script src="./scripts/machine.js"></script>
+    <script src="./scripts/script.js"></script>
+  </body>
 </html>

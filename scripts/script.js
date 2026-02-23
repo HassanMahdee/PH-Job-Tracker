@@ -115,7 +115,7 @@ function renderJobList(jobList, sectionID) {
       let isRejected = job.status === "Rejected";
       let renderedJobList = document.createElement("div");
       renderedJobList.className =
-        "job-card bg-base-100 border-base-300 p-4 rounded-lg flex flex-col gap-2 shadow-md hover:scale-105";
+        "job-card bg-base-100 border-base-300 p-4 rounded-lg flex flex-col gap-2 shadow-md hover:scale-105 transition-all duration-150";
       renderedJobList.innerHTML = `
               <div class="flex justify-between">
                 <div>

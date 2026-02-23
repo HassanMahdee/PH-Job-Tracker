@@ -90,13 +90,32 @@ let allJobs = [
   },
 ];
 // all "job-card"s will be made from this 'allJobs' array job objects.
-function renderAllJobs() {
-  document.getElementById("all-section").innerHTML = "";
-  for (let job of allJobs) {
-    let renderedJobList = document.createElement("div");
-    renderedJobList.className =
-      "job-card bg-base-100 border-base-300 p-4 rounded-lg flex flex-col gap-2";
-    renderedJobList.innerHTML = `
+function renderJobList(jobList, sectionID) {
+  document.getElementById(sectionID).innerHTML = "";
+  if (jobList.length === 0) {
+    let emptyJobList = document.createElement("div");
+    emptyJobList.className = "flex flex-col gap-4";
+    emptyJobList.innerHTML = `
+            <div class="bg-base-100 p-6 flex flex-col justify-center items-center min-h-[40vh] rounded-xl">
+              <img src="./jobs.png" alt="job img" class="mb-3" />
+              <h2 class="capitalize text-2xl font-bold">no jobs available</h2>
+              <p class="capitalize opacity-50">
+                check back soon to get new job opportunities!
+              </p>
+            </div>
+    `;
+    document.getElementById(sectionID).appendChild(emptyJobList);
+    return;
+  } else {
+    for (let job of jobList) {
+      // if a "job-card" has interview status then the "interview-btn" will be disabled in html building.
+      let isInterview = job.status === "Interview";
+      // if a "job-card" has rejected status then the "rejected-btn" will be disabled in html building.
+      let isRejected = job.status === "Rejected";
+      let renderedJobList = document.createElement("div");
+      renderedJobList.className =
+        "job-card bg-base-100 border-base-300 p-4 rounded-lg flex flex-col gap-2";
+      renderedJobList.innerHTML = `
               <div class="flex justify-between">
                 <div>
                   <h3 class="text-xl font-semibold">${job.companyName}</h3>
@@ -116,36 +135,34 @@ function renderAllJobs() {
               <p class="w-max block bg-base-300 p-2">${job.status}</p>
               <p>${job.jobDescription}</p>
               <div id="btn-set" class="flex gap-2">
-                <button data-id="${job.id}"
+                <button data-id="${job.id}" ${isInterview ? "disabled" : ""}
                   class="interview-btn btn btn-outline border border-success capitalize text-success shadow-sm hover:bg-green-100"
                 >
                   interview</button
-                ><button data-id="${job.id}"
+                ><button data-id="${job.id}" ${isRejected ? "disabled" : ""}
                   class="rejected-btn btn btn-outline border border-error capitalize text-error shadow-sm hover:bg-red-100"
                 >
                   rejected
                 </button>
               </div>
 `;
-    document.getElementById("all-section").appendChild(renderedJobList);
-  }
-  if (allJobs.length === 0) {
-    let emptyJobList = document.createElement("div");
-    emptyJobList.className = "flex flex-col gap-4";
-    emptyJobList.innerHTML = `
-            <div class="bg-base-100 p-6 flex flex-col justify-center items-center min-h-[40vh] rounded-xl">
-              <img src="./jobs.png" alt="job img" class="mb-3" />
-              <h2 class="capitalize text-2xl font-bold">no jobs available</h2>
-              <p class="capitalize opacity-50">
-                check back soon to get new job opportunities!
-              </p>
-            </div>
-    `;
+      document.getElementById(sectionID).appendChild(renderedJobList);
+    }
   }
 }
 function renderUI() {
   if (document.getElementById("all-tab").checked) {
-    renderAllJobs();
+    renderJobList(allJobs, "all-section");
+  }
+  // clicking on "interview-tab" will remove it's child's html and take all job objects with status:interview and render a new card-list.
+  if (document.getElementById("interview-tab").checked) {
+    let interviewList = allJobs.filter((job) => job.status === "Interview");
+    renderJobList(interviewList, "interview-section");
+  }
+  // clicking on "rejected-tab" will remove it's child's html and take all job objects with status:rejected and render a new card-list.
+  if (document.getElementById("rejected-tab").checked) {
+    let rejectedList = allJobs.filter((job) => job.status === "Rejected");
+    renderJobList(rejectedList, "rejected-section");
   }
   // the all-stat will show the length of allJobs array, interview-stat will show the ones with status:interview, and rejected-stat will show the ones with status:rejected.
   document.getElementById("all-stat").innerText = allJobs.length;
@@ -156,7 +173,11 @@ function renderUI() {
     (job) => job.status === "Rejected",
   ).length;
 }
-renderUI();
+document.addEventListener("change", (e) => {
+  if (e.target.name === "job-tab") {
+    renderUI();
+  }
+});
 // clicking the "interview-btn" will find the id-key of that job-object and update it's status-key from 'not applied/rejected' to 'interview'.
 document.addEventListener("click", (e) => {
   if (e.target.classList.contains("interview-btn")) {
@@ -175,7 +196,4 @@ document.addEventListener("click", (e) => {
     renderUI();
   }
 });
-// clicking on "interview-tab" will remove it's child's html and take all job objects with status:interview and render a new card-list.
-// clicking on "rejected-tab" will remove it's child's html and take all job objects with status:rejected and render a new card-list.
-// if a "job-card" has interview status then the "interview-btn" will be disabled.
-// if a "job-card" has rejected status then the "rejected-btn" will be disabled.
+renderUI();

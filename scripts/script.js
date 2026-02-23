@@ -105,6 +105,7 @@ function renderJobList(jobList, sectionID) {
             </div>
     `;
     document.getElementById(sectionID).appendChild(emptyJobList);
+    document.getElementById("stat-below").innerText = jobList.length;
     return;
   } else {
     for (let job of jobList) {
@@ -114,7 +115,7 @@ function renderJobList(jobList, sectionID) {
       let isRejected = job.status === "Rejected";
       let renderedJobList = document.createElement("div");
       renderedJobList.className =
-        "job-card bg-base-100 border-base-300 p-4 rounded-lg flex flex-col gap-2";
+        "job-card bg-base-100 border-base-300 p-4 rounded-lg flex flex-col gap-2 shadow-md hover:scale-105";
       renderedJobList.innerHTML = `
               <div class="flex justify-between">
                 <div>
@@ -132,7 +133,7 @@ function renderJobList(jobList, sectionID) {
                 &bull;<span>${job.type}</span>
                 &bull;<span>${job.salaryRange}</span>
               </p>
-              <p class="w-max block bg-base-300 p-2">${job.status}</p>
+              <p class="w-max block bg-base-300 p-2 ${isInterview ? "bg-success/10" : ""} ${isInterview ? "text-success" : ""} ${isRejected ? "bg-error/10" : ""} ${isRejected ? "text-error" : ""}">${job.status}</p>
               <p>${job.jobDescription}</p>
               <div id="btn-set" class="flex gap-2">
                 <button data-id="${job.id}" ${isInterview ? "disabled" : ""}
@@ -147,6 +148,7 @@ function renderJobList(jobList, sectionID) {
               </div>
 `;
       document.getElementById(sectionID).appendChild(renderedJobList);
+      document.getElementById("stat-below").innerText = jobList.length;
     }
   }
 }

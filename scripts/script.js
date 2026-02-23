@@ -91,17 +91,18 @@ let allJobs = [
 ];
 // all "job-card"s will be made from this 'allJobs' array job objects.
 function renderAllJobs() {
+  document.getElementById("all-section").innerHTML = "";
   for (let job of allJobs) {
     let renderedJobList = document.createElement("div");
     renderedJobList.className =
-      "bg-base-100 border-base-300 p-4 rounded-lg flex flex-col gap-2";
+      "job-card bg-base-100 border-base-300 p-4 rounded-lg flex flex-col gap-2";
     renderedJobList.innerHTML = `
               <div class="flex justify-between">
                 <div>
                   <h3 class="text-xl font-semibold">${job.companyName}</h3>
                   <p class="text-neutral/50">${job.position}</p>
                 </div>
-                <button
+                <button data-id="${job.id}"
                   class="delete-btn btn btn-outline border-none hover:bg-red-100/50 hover:text-red-600 self-start"
                 >
                   <i class="fa-regular fa-trash-can"></i>
@@ -115,11 +116,11 @@ function renderAllJobs() {
               <p class="w-max block bg-base-300 p-2">${job.status}</p>
               <p>${job.jobDescription}</p>
               <div id="btn-set" class="flex gap-2">
-                <button
+                <button data-id="${job.id}"
                   class="interview-btn btn btn-outline border border-success capitalize text-success shadow-sm hover:bg-green-100"
                 >
                   interview</button
-                ><button
+                ><button data-id="${job.id}"
                   class="rejected-btn btn btn-outline border border-error capitalize text-error shadow-sm hover:bg-red-100"
                 >
                   rejected
@@ -128,15 +129,53 @@ function renderAllJobs() {
 `;
     document.getElementById("all-section").appendChild(renderedJobList);
   }
+  if (allJobs.length === 0) {
+    let emptyJobList = document.createElement("div");
+    emptyJobList.className = "flex flex-col gap-4";
+    emptyJobList.innerHTML = `
+            <div class="bg-base-100 p-6 flex flex-col justify-center items-center min-h-[40vh] rounded-xl">
+              <img src="./jobs.png" alt="job img" class="mb-3" />
+              <h2 class="capitalize text-2xl font-bold">no jobs available</h2>
+              <p class="capitalize opacity-50">
+                check back soon to get new job opportunities!
+              </p>
+            </div>
+    `;
+  }
 }
-if (document.getElementById("all-tab").checked) {
-  renderAllJobs();
+function renderUI() {
+  if (document.getElementById("all-tab").checked) {
+    renderAllJobs();
+  }
+  // the all-stat will show the length of allJobs array, interview-stat will show the ones with status:interview, and rejected-stat will show the ones with status:rejected.
+  document.getElementById("all-stat").innerText = allJobs.length;
+  document.getElementById("interview-stat").innerText = allJobs.filter(
+    (job) => job.status === "Interview",
+  ).length;
+  document.getElementById("rejected-stat").innerText = allJobs.filter(
+    (job) => job.status === "Rejected",
+  ).length;
 }
-// clicking the "interview-btn" will filter the id-key of that job-object and update it's status-key from 'not applied/rejected' to 'interview'.
-// clicking the "rejected-btn" will filter the id-key of that job-object and update it's status-key from 'not applied/interview' to 'rejected'.
-// the all-stat will show the length of allJobs array, interview-stat will show the ones with status:interview, and rejected-stat will show the ones with status:rejected.
+renderUI();
+// clicking the "interview-btn" will find the id-key of that job-object and update it's status-key from 'not applied/rejected' to 'interview'.
+document.addEventListener("click", (e) => {
+  if (e.target.classList.contains("interview-btn")) {
+    allJobs.find((job) => job.id === Number(e.target.dataset.id)).status =
+      "Interview";
+    renderUI();
+  } // clicking the "rejected-btn" will find the id-key of that job-object and update it's status-key from 'not applied/interview' to 'rejected'.
+  else if (e.target.classList.contains("rejected-btn")) {
+    allJobs.find((job) => job.id === Number(e.target.dataset.id)).status =
+      "Rejected";
+    renderUI();
+  } // "delete-btn" will have a data-id similar to it's parant job-id, when delete-btn is clicked, it'll filter out the job with the same id from "allJobs" array.
+  const deleteBtn = e.target.closest(".delete-btn");
+  if (deleteBtn) {
+    allJobs = allJobs.filter((job) => job.id !== Number(deleteBtn.dataset.id));
+    renderUI();
+  }
+});
 // clicking on "interview-tab" will remove it's child's html and take all job objects with status:interview and render a new card-list.
 // clicking on "rejected-tab" will remove it's child's html and take all job objects with status:rejected and render a new card-list.
 // if a "job-card" has interview status then the "interview-btn" will be disabled.
 // if a "job-card" has rejected status then the "rejected-btn" will be disabled.
-// "delete-btn" will have a data-id similar to it's parant job-id, when delete-btn is clicked, it'll filter out the job with the same id from "allJobs" array.
